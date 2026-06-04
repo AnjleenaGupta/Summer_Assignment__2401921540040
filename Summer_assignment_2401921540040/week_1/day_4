@@ -1,0 +1,83 @@
+//Matrix diagonal sum
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+        
+        int r=mat.size();
+        int c=mat[0].size();
+        int mid= mat[r/2][c/2];
+     int sum=0;
+     for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            if(i==j){
+                sum += mat[i][j];
+            }
+        }}
+        int i=0;
+        int j=c-1;
+        while(i<r && j>=0){
+            sum += mat[i][j];
+            i++;
+            j--;
+        
+     }  
+     if( r%2==1 || c%2==1){
+        sum -= mid;
+     } 
+     return sum;
+    }
+};
+
+//Reshape the matrix
+class Solution {
+public:
+    vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c) {
+        int m=mat.size();
+        int n= mat[0].size();
+        if(m*n !=r*c)
+        return mat;
+        vector<vector<int>> newmat(r,vector<int>(c));
+        for(int i=0;i< m*n; i++){
+            newmat[i/c][i%c]=mat[i/n][i%n];
+        }
+        return newmat;
+    }
+};
+//Spiral matrix 
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+     vector<int> ans;
+     int row= matrix.size();
+     int col= matrix[0].size();
+     int startingrow= 0;
+     int endingrow= row-1;
+     int startingcol=0;
+     int endingcol=col-1;
+     int count=0;
+     int total= row*col;
+     while(count<total){
+        for(int i=startingcol;i<=endingcol && count<total;i++){
+            ans.push_back(matrix[startingrow][i]);
+            count++;
+        }
+        startingrow++;
+        for(int i=startingrow;i<=endingrow && count<total;i++){
+            ans.push_back(matrix[i][endingcol]);
+            count++;
+        }
+        endingcol--;
+        for(int i=endingcol;i>=startingcol && count<total;i--){
+            ans.push_back(matrix[endingrow][i]);
+            count++;
+        }
+        endingrow--;
+        for(int i=endingrow;i>=startingrow && count<total ;i--){
+            ans.push_back(matrix[i][startingcol]);
+            count++;
+        }
+        startingcol++;
+     }  
+     return ans; 
+    }
+};
